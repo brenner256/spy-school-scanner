@@ -1,0 +1,8 @@
+{
+  "name": "Spy School Access Scanner",
+  "short_name": "Spy School Access",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "Access scanner application for confirming and authorizing access to Spy School.",
+}
