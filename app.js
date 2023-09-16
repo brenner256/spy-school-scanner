@@ -20,7 +20,18 @@ var app = {
         app.addMessage("Scan button click");
         if (app.ncfReader) {
             app.addMessage("Starting scan");
-            app.ncfReader.scan();
+            app.ncfReader.scan().then(function() {
+                app.addMessage("Scan started");
+                app.ncfReader.onreading = function(nfcEvt) {
+                    app.addMessage("Message read");
+                    app.scannerReading(nfcEvt);
+                }
+                app.ncfReader.onreadingerror  = function(nfcEvt) {
+                    app.addMessage("Message read error");
+                }
+            }).catch(function(error) {
+                app.addMessage("Scan promise error");
+            });
         } else {
             app.addMessage("NFC reader is null");
         }
@@ -71,8 +82,8 @@ var app = {
         if ('NDEFReader' in window) { 
             app.addMessage("NFC reader supported");
             app.ncfReader = new NDEFReader();
-            app.ncfReader.addEventListener("reading", this.scannerReading);
-            app.ncfReader.addEventListener("readingerror", this.scannerReadError)
+            //app.ncfReader.addEventListener("reading", this.scannerReading);
+            //app.ncfReader.addEventListener("readingerror", this.scannerReadError)
         } else {
             app.addMessage("NFC reader NOT supported");
         }
