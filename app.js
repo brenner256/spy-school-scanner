@@ -42,7 +42,7 @@ var app = {
             app.ncfReader.scan().then(function() {
                 app.addMessage("Scan started");
                 app.changeVisibility_EnableScanningDiv(false);
-                app.changeVisibility_AwaitingScanDiv(false);
+                app.changeVisibility_AwaitingScanDiv(true);
                 app.updateHeader("SCAN TO ENTER", "#ff0000", true);
 
                 app.ncfReader.onreading = (event) => {
@@ -188,23 +188,23 @@ var app = {
                 app.accessGrantedDiv.innerHTML = `${card.name}<br>${card.title}<br>`
                 app.changeVisibility_AccessGrantedDiv(true);
                 app.updateHeader("ACCESS GRANTED", "#0ab40a", true);
-            }, 5000)
+            }, 3000)
             setTimeout(function() {
                 app.changeVisibility_AccessGrantedDiv(false);
                 app.changeVisibility_AwaitingScanDiv(true)
                 app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
-            }, 9000)
+            }, 7000)
         } else {
             setTimeout(function() {
                 app.changeVisibility_ScanningActiveDiv(false);
                 app.changeVisibility_AccessDeniedDiv(true);
                 app.updateHeader("ACCESS DENIED", "#aa0a00", true);
-            }, 5000)
+            }, 3000)
             setTimeout(function() {
                 app.changeVisibility_AccessGrantedDiv(false);
                 app.changeVisibility_AwaitingScanDiv(true)
                 app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
-            }, 9000)
+            }, 7000)
         }
     },
 
