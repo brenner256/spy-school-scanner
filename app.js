@@ -33,18 +33,14 @@ var app = {
                 app.changeVisibility_AwaitingScanDiv(false);
                 app.updateHeader("SCAN TO ENTER", "#ff0000", true);
 
-                app.ncfReader.onreading = function(nfcEvt) {
+                app.ncfReader.onreading = (event) => {
+                    console.log("Message read", nfcEvt);
                     app.addMessage("Message read");
-                    for (const [key, value] of Object.entries(e)) {
-                        app.addMessage(`${key}: ${value}`);
-                    }
                     //app.scannerReading(nfcEvt);
                 }
-                app.ncfReader.onreadingerror  = function(nfcEvt) {
+                app.ncfReader.onreadingerror  = (event) => {
+                    console.log("Message read error", event);
                     app.addMessage("Message read error");
-                    for (const [key, value] of Object.entries(e)) {
-                        app.addMessage(`${key}: ${value}`);
-                    }
                 }
 
             }).catch(function(error) {
