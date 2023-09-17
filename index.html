@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/icons/spy.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="site.css" />
@@ -8,8 +10,43 @@
     <title>Spy School Access Scanner</title>
   </head>
   <body>
-    <div>Welcome to Spy School.</div>
-    <div><button id="scan-card-button">Scan</button></div>
-    <div id="message-div"></div>
+    <div id="container-div">
+      <div id="title-div">Spy Skills Training Access</div>
+
+      <div class="hidden" id="header-div"></div>
+
+      <div class="content-div" >
+        <div id="enable-scanning-div">
+          <button id="enable-scanning-button">Enabled Scanning</button>
+        </div>
+      </div>
+      
+      <div class="content-div">
+        <div class="hidden" id="awaiting-scan-div">
+          Awaiting Access Card Scan
+        </div>
+      </div>
+      
+      <div class="content-div">
+        <div class="hidden" id="scanning-active-div">
+          scanning active (anim)
+        </div>
+      </div>
+
+      <div class="content-div">
+        <div class="hidden" id="access-granted-div">
+          access granted (anim)
+        </div>
+      </div>
+
+      <div class="content-div">
+        <div class="hidden" id="access-denied-div">
+          access denied (anim)
+        </div>
+      </div>
+
+      <div id="message-div"></div>
+
+    </div>
   </body>
 </html>

@@ -1,8 +1,228 @@
+/*****************************************/
+/* Main layout UI controls
+/*****************************************/
 
-
+html {
+    margin: 0;
+    padding: 0;
+}
 
 body {
-    background-color: rgb(90, 100, 105);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background: #333333;
+    background-image: 
+        linear-gradient(rgba(80, 80, 80, 0.1) .05em, transparent .05em), 
+        linear-gradient(90deg, rgba(80, 80, 80, .1) .05em, transparent .05em);
+    background-size: 1em 1em;
+
+    /* background: linear-gradient(170deg, 
+        rgba(61, 67, 80, 0.8) 20%, 
+        rgba(49, 57, 73, 0.5) 20%, 
+        rgba(49, 57, 73, 0.5) 35%, 
+        rgba(41, 48, 61, 0.6) 35%, 
+        rgba(41, 48, 61, 0.8) 45%, 
+        rgba(31, 36, 46, 0.5) 45%, 
+        rgba(31, 36, 46, 0.8) 75%, 
+        rgba(49, 57, 73, 0.5) 75%), 
+        linear-gradient(30deg,
+        rgba(20, 24, 31, 0.8) 0%,
+        rgba(41, 48, 61, 0.8) 50%,
+        rgba(82, 95, 122, 0.8) 50%,
+        rgba(133, 146, 173, 0.8) 100%)
+        #313949; */
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16pt;
+    color: #efefef;
+}
+
+#title-div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 6px;
+    padding-bottom: 8px;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    border-top: solid 1px #efefef;
+    border-bottom: solid 1px #efefef;
+}
+
+#header-div {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: larger;
+    /* border: solid 1px white */
+}
+
+.content-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#enable-scanning-div {
+    /* border: solid 1px white */
+}
+
+#enable-scanning-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px;
+    border-radius: 8px;
+    border: solid 2px rgb(13, 110, 253);
+    background-color: rgba(25, 75, 150, 0.9);
+    color: rgb(255, 255, 253);
+    font-size: 16pt;
+
+}
+
+#awaiting-scan-div {
+    margin-top: 20px;
+    padding-top: 55px;
+    padding-bottom: 60px;
+    width: 30vh;
+    border-radius: 8px;
+    border: solid 2px rgb(13, 110, 253);
+    text-align: center;
+}
+
+#scanning-active-div {
+    margin-top: 20px;
+    padding-top: 55px;
+    padding-bottom: 60px;
+    width: 30vh;
+    border-radius: 8px;
+    border: solid 2px rgb(13, 110, 253);
+    text-align: center;
+}
+
+#access-granted-div {
+    margin-top: 20px;
+    padding-top: 55px;
+    padding-bottom: 60px;
+    width: 30vh;
+    border-radius: 8px;
+    border: solid 2px rgb(10, 180, 10);
+    text-align: center;
+}
+
+#access-denied-div {
+    margin-top: 20px;
+    padding-top: 55px;
+    padding-bottom: 60px;
+    width: 30vh;
+    border-radius: 8px;
+    border: solid 2px rgb(170, 10, 0);
+    text-align: center;
+}
+
+#message-div {
+    margin-top: 5cqw;
+    margin-left: 5px;
+    font-size: small;
 }
 
 
+
+/*****************************************/
+/* Helper classes
+/*****************************************/
+
+.hidden {
+    display: none;
+}
+
+
+
+/*****************************************/
+/* Scan lines
+/*****************************************/
+
+
+
+.fingerprint {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .fingerprint.scanning::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(to bottom,
+      rgba(170, 184, 190, 0),
+      rgba(170, 184, 190, .8));
+    animation: scanning .8s linear infinite;
+  }
+  
+  @keyframes scanning {
+      100% { transform: translate(0, 52px); }
+  }
+
+
+
+/* 
+.scanlines {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+  }
+
+
+  .scanlines:before, .scanlines:after {
+    display: block;
+    pointer-events: none;
+    content: "";
+    position: absolute;
+  }
+  .scanlines:before {
+    width: 100%;
+    height: 2px;
+    z-index: 2147483649;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0.75;
+    -webkit-animation: scanline 6s linear infinite;
+            animation: scanline 6s linear infinite;
+  }
+  .scanlines:after {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2147483648;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.3) 51%);
+    background-size: 100% 4px;
+    -webkit-animation: scanlines 1s steps(60) infinite;
+            animation: scanlines 1s steps(60) infinite;
+  }
+
+  @-webkit-keyframes scanline {
+    0% {
+      transform: translate3d(0, 200000%, 0);
+    }
+  }
+  @keyframes scanline {
+    0% {
+      transform: translate3d(0, 200000%, 0);
+    }
+  } */
+  /* @-webkit-keyframes scanlines {
+    0% {
+      background-position: 0 50%;
+    }
+  }
+  @keyframes scanlines {
+    0% {
+      background-position: 0 50%;
+    }
+  }
+   */
