@@ -2,6 +2,18 @@ var app = {
 
     // App properties
     ncfReader: null,
+    cardData: [
+        {
+            serialNumber: "04:9a:ad:99:78:00:00",
+            name: "Jason Brenner",
+            title: "Tech Specialist"
+        },
+        {
+            serialNumber: "test1",
+            name: "Shannon Brenenr",
+            title: "Tech Specialist"
+        }
+    ],
 
     
     // UI elements
@@ -35,9 +47,10 @@ var app = {
 
                 app.ncfReader.onreading = (event) => {
                     console.log("Message read", event);
-                    app.addMessage("Message read");
-                    //app.scannerReading(event);
+                    app.addMessage("Message read: " + event.serialNumber);
+                    app.updateFromScan(event.serialNumber);
                 }
+
                 app.ncfReader.onreadingerror  = (event) => {
                     console.log("Message read error", event);
                     app.addMessage("Message read error");
@@ -72,45 +85,7 @@ var app = {
 
     },
 
-    // Event: scanner reading
-    scannerReading: function(e) {
-        if (e) {
-            for (const [key, value] of Object.entries(e)) {
-                app.addMessage(`${key}: ${value}`);
-            }
-        } else {
-            app.addMessage("Scan event obj is null");
-        }
-
-
-        // const message = e.message;
-        // for (const record of message.records) {
-        //     console.log("Record type:  " + record.recordType);
-        //     console.log("MIME type:    " + record.mediaType);
-        //     console.log("Record id:    " + record.id);
-
-
-        //     app.addMessage("Record type: " + record.recordType);
-        //     app.addMessage("Mime type: " + record.mediaType);
-        //     app.addMessage("Record id: " + record.id);
-            
-        //     // switch (record.recordType) {
-        //     // case "text":
-        //     //     // TODO: Read text record with record data, lang, and encoding.
-        //     //     break;
-        //     // case "url":
-        //     //     // TODO: Read URL record with record data.
-        //     //     break;
-        //     // default:
-        //     //     // TODO: Handle other records with record data.
-        //     // }
-        // }
-    },
-
-    // Event: scanner read error
-    scannerReadError: function(e) {
-        app.addMessage("Cannot read data from NFC tag");
-    },
+    
 
 
 
@@ -199,6 +174,43 @@ var app = {
         } else {
             app.accessDeniedDiv.classList.add("hidden");
         }
+    },
+
+    // Event: scanner reading
+    updateFromScan: function(scannedSerialNum) {
+        app.changeVisibility_AwaitingScanDiv(false);
+        app.changeVisibility_ScanningActiveDiv(true);
+
+        const card = app.cardData.find(({ serialNumber }) => serialNumber == scannedSerialNum);
+        if (card) {
+            setTimeout(function() {
+                app.changeVisibility_ScanningActiveDiv(false);
+                app.accessGrantedDiv.innerHTML = `${card.name}<br>${card.title}<br>`
+                app.changeVisibility_AccessGrantedDiv(true);
+                app.updateHeader("ACCESS GRANTED", "#0ab40a", true);
+            }, 5000)
+            setTimeout(function() {
+                app.changeVisibility_AccessGrantedDiv(false);
+                app.changeVisibility_AwaitingScanDiv(true)
+                app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
+            }, 9000)
+        } else {
+            setTimeout(function() {
+                app.changeVisibility_ScanningActiveDiv(false);
+                app.changeVisibility_AccessDeniedDiv(true);
+                app.updateHeader("ACCESS DENIED", "#aa0a00", true);
+            }, 5000)
+            setTimeout(function() {
+                app.changeVisibility_AccessGrantedDiv(false);
+                app.changeVisibility_AwaitingScanDiv(true)
+                app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
+            }, 9000)
+        }
+    },
+
+    // Event: scanner read error
+    scannerReadError: function(e) {
+        app.addMessage("Cannot read data from NFC tag");
     },
 
 
