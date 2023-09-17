@@ -35,10 +35,16 @@ var app = {
 
                 app.ncfReader.onreading = function(nfcEvt) {
                     app.addMessage("Message read");
-                    app.scannerReading(nfcEvt);
+                    for (const [key, value] of Object.entries(e)) {
+                        app.addMessage(`${key}: ${value}`);
+                    }
+                    //app.scannerReading(nfcEvt);
                 }
                 app.ncfReader.onreadingerror  = function(nfcEvt) {
                     app.addMessage("Message read error");
+                    for (const [key, value] of Object.entries(e)) {
+                        app.addMessage(`${key}: ${value}`);
+                    }
                 }
 
             }).catch(function(error) {
@@ -49,24 +55,24 @@ var app = {
         }
 
 
-        // TODO: for testing
-        app.changeVisibility_EnableScanningDiv(false);
-        app.changeVisibility_AwaitingScanDiv(true);
-        app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
-        setTimeout(function() {
-            app.changeVisibility_AwaitingScanDiv(false);
-            app.changeVisibility_ScanningActiveDiv(true);
-        }, 15000)
-        setTimeout(function() {
-            app.changeVisibility_ScanningActiveDiv(false);
-            app.changeVisibility_AccessGrantedDiv(true);
-            app.updateHeader("ACCESS GRANTED", "#0ab40a", true);
-        }, 20000)
-        setTimeout(function() {
-            app.changeVisibility_AccessGrantedDiv(false);
-            app.changeVisibility_AwaitingScanDiv(true)
-            app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
-        }, 25000)
+        // // TODO: for testing
+        // app.changeVisibility_EnableScanningDiv(false);
+        // app.changeVisibility_AwaitingScanDiv(true);
+        // app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
+        // setTimeout(function() {
+        //     app.changeVisibility_AwaitingScanDiv(false);
+        //     app.changeVisibility_ScanningActiveDiv(true);
+        // }, 15000)
+        // setTimeout(function() {
+        //     app.changeVisibility_ScanningActiveDiv(false);
+        //     app.changeVisibility_AccessGrantedDiv(true);
+        //     app.updateHeader("ACCESS GRANTED", "#0ab40a", true);
+        // }, 20000)
+        // setTimeout(function() {
+        //     app.changeVisibility_AccessGrantedDiv(false);
+        //     app.changeVisibility_AwaitingScanDiv(true)
+        //     app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
+        // }, 25000)
 
     },
 
@@ -75,7 +81,7 @@ var app = {
         if (e) {
             for (const [key, value] of Object.entries(e)) {
                 app.addMessage(`${key}: ${value}`);
-              }
+            }
         } else {
             app.addMessage("Scan event obj is null");
         }
