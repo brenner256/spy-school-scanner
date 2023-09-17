@@ -34,9 +34,9 @@ var app = {
                 app.updateHeader("SCAN TO ENTER", "#ff0000", true);
 
                 app.ncfReader.onreading = (event) => {
-                    console.log("Message read", nfcEvt);
+                    console.log("Message read", event);
                     app.addMessage("Message read");
-                    //app.scannerReading(nfcEvt);
+                    //app.scannerReading(event);
                 }
                 app.ncfReader.onreadingerror  = (event) => {
                     console.log("Message read error", event);
