@@ -2,6 +2,8 @@
 /* Main layout UI controls
 /*****************************************/
 
+@import url(https://fonts.googleapis.com/css?family=Exo:400);
+
 html {
     margin: 0;
     padding: 0;
@@ -12,31 +14,42 @@ body {
     padding: 0;
     width: 100%;
     height: 100vh;
-    background: #333333;
+    
+    background: linear-gradient(to bottom,  rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9) 51%);
+    background-size: 100% 4px;
+
+    /* background: radial-gradient(#212429,#1f1013); */
+
+    /* background: #333333;
     background-image: 
-        linear-gradient(rgba(80, 80, 80, 0.1) .05em, transparent .05em), 
-        linear-gradient(90deg, rgba(80, 80, 80, .1) .05em, transparent .05em);
-    background-size: 1em 1em;
+        linear-gradient(rgba(80, 80, 80, 0.1) .05rem, transparent .05rem), 
+        linear-gradient(90deg, rgba(80, 80, 80, .1) .05rem, transparent .05rem);
+    background-size: 1rem 1rem; */
 
-    /* background: linear-gradient(170deg, 
-        rgba(61, 67, 80, 0.8) 20%, 
-        rgba(49, 57, 73, 0.5) 20%, 
-        rgba(49, 57, 73, 0.5) 35%, 
-        rgba(41, 48, 61, 0.6) 35%, 
-        rgba(41, 48, 61, 0.8) 45%, 
-        rgba(31, 36, 46, 0.5) 45%, 
-        rgba(31, 36, 46, 0.8) 75%, 
-        rgba(49, 57, 73, 0.5) 75%), 
-        linear-gradient(30deg,
-        rgba(20, 24, 31, 0.8) 0%,
-        rgba(41, 48, 61, 0.8) 50%,
-        rgba(82, 95, 122, 0.8) 50%,
-        rgba(133, 146, 173, 0.8) 100%)
-        #313949; */
-
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16pt;
+    font-family: exo, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
     color: #efefef;
+}
+
+#container-div {
+    width: auto;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#container-div #container-anim-div{
+    background-color: rgb(50, 50, 50, .2);
+    height: 4px;
+    top: 100%;
+    box-shadow: 0 0 6px rgb(50, 50, 50, .2);
+    animation: scanning 7s infinite;
+}
+
+@keyframes scanning {
+    80% {
+      transform: translateY(100vh);
+    }
 }
 
 #title-div {
@@ -47,8 +60,10 @@ body {
     text-align: center;
     font-size: larger;
     font-weight: bold;
-    border-top: solid 1px #efefef;
-    border-bottom: solid 1px #efefef;
+    font-kerning: none;
+    filter: drop-shadow(.05rem .05rem .25rem rgb(233, 209, 105));
+    z-index: 2;
+    position: relative;
 }
 
 #header-div {
@@ -56,13 +71,16 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: larger;
-    /* border: solid 1px white */
+    z-index: 2;
+    position: relative;
 }
 
 .content-div {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
+    position: relative;
 }
 
 #enable-scanning-div {
@@ -74,11 +92,10 @@ body {
     margin-bottom: 20px;
     padding: 30px;
     border-radius: 8px;
-    border: solid 2px rgb(13, 110, 253);
-    background-color: rgba(25, 75, 150, 0.9);
-    color: rgb(255, 255, 253);
+    border: solid 2px rgb(0, 97, 243);
+    background: linear-gradient(#005de9,#00327e);
+    color: rgb(216, 231, 255);
     font-size: 16pt;
-
 }
 
 #awaiting-scan-div {
@@ -89,6 +106,13 @@ body {
     border-radius: 8px;
     border: solid 2px rgb(13, 110, 253);
     text-align: center;
+    animation: fadeInOut 1s infinite alternate;
+}
+
+@keyframes fadeInOut {
+    from {
+        opacity: 0.1;
+    }
 }
 
 #scanning-active-div {
@@ -145,14 +169,10 @@ body {
 
 
 
-.fingerprint {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .fingerprint.scanning::after {
+
+/* 
+
+#container-div.scanning::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -162,10 +182,15 @@ body {
       rgba(170, 184, 190, .8));
     animation: scanning .8s linear infinite;
   }
-  
+
+
+
   @keyframes scanning {
-      100% { transform: translate(0, 52px); }
-  }
+    100% { transform: translate(0, 152px); }
+} */
+
+
+  
 
 
 

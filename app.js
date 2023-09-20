@@ -1,8 +1,17 @@
 var app = {
 
+    // TODO:
+    // Add audio for access granted/denied
+    // Add photos
+    // Animation for awaiting card scan
+    // Animation for scanning card
+
+
+
+
     // App properties
     ncfReader: null,
-    cardData: [
+    nfcCardData: [
         {
             serialNumber: "04:9a:ad:99:78:00:00",
             name: "Jason Brenner",
@@ -11,7 +20,7 @@ var app = {
         {
             serialNumber: "test1",
             name: "Shannon Brenenr",
-            title: "Tech Specialist"
+            title: "Master Spy"
         }
     ],
 
@@ -25,6 +34,11 @@ var app = {
     accessGrantedDiv: null,
     accessDeniedDiv: null,
     messageDiv: null,
+    scanningAudio: null,
+
+    color_red: "#ff0000",
+    color_blue: "#005de9",
+    color_green: "#0ab40a",
 
 
     // Event: page load
@@ -38,50 +52,37 @@ var app = {
         app.addMessage("Enable scanning button click");
         
         // TODO: commented out for testing
-        if (app.ncfReader) {
-            app.ncfReader.scan().then(function() {
-                app.addMessage("Scan started");
-                app.changeVisibility_EnableScanningDiv(false);
-                app.changeVisibility_AwaitingScanDiv(true);
-                app.updateHeader("SCAN TO ENTER", "#ff0000", true);
+        // if (app.ncfReader) {
+        //     app.ncfReader.scan().then(function() {
+        //         app.transitionTo_AwaitingScan(app.enableScanningDiv);
 
-                app.ncfReader.onreading = (event) => {
-                    console.log("Message read", event);
-                    app.addMessage("Message read: " + event.serialNumber);
-                    app.updateFromScan(event.serialNumber);
-                }
+        //         app.ncfReader.onreading = (event) => {
+        //             console.log("Message read", event);
+        //             app.addMessage("Message read: " + event.serialNumber);
+        //             app.handleScannerResponse(event.serialNumber);
+        //         }
 
-                app.ncfReader.onreadingerror  = (event) => {
-                    console.log("Message read error", event);
-                    app.addMessage("Message read error");
-                }
+        //         app.ncfReader.onreadingerror  = (event) => {
+        //             console.log("Message read error", event);
+        //             app.addMessage("Message read error");
+        //             app.handleScannerResponse(null);
+        //         }
 
-            }).catch(function(error) {
-                app.addMessage("Scan promise error");
-            });
-        } else {
-            app.addMessage("NFC reader is null");
-        }
+        //     }).catch(function(error) {
+        //         console.log("Scan promise error", error);
+        //         app.addMessage("Scan promise error");
+        //     });
+        // } else {
+        //     console.log("NFC reader is null");
+        //     app.addMessage("NFC reader is null");
+        // }
 
 
-        // // TODO: for testing
-        // app.changeVisibility_EnableScanningDiv(false);
-        // app.changeVisibility_AwaitingScanDiv(true);
-        // app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
-        // setTimeout(function() {
-        //     app.changeVisibility_AwaitingScanDiv(false);
-        //     app.changeVisibility_ScanningActiveDiv(true);
-        // }, 15000)
-        // setTimeout(function() {
-        //     app.changeVisibility_ScanningActiveDiv(false);
-        //     app.changeVisibility_AccessGrantedDiv(true);
-        //     app.updateHeader("ACCESS GRANTED", "#0ab40a", true);
-        // }, 20000)
-        // setTimeout(function() {
-        //     app.changeVisibility_AccessGrantedDiv(false);
-        //     app.changeVisibility_AwaitingScanDiv(true)
-        //     app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
-        // }, 25000)
+        // TODO: for testing
+        app.transitionTo_AwaitingScan(app.enableScanningDiv);
+        setTimeout(function() {
+            app.handleScannerResponse("04:9a:ad:99:78:00:00");
+        }, 5000)
 
     },
 
@@ -107,6 +108,9 @@ var app = {
         app.accessDeniedDiv = document.querySelector("#access-denied-div");
 
         app.messageDiv = document.querySelector("#message-div");
+
+        app.scanningAudio = document.querySelector("#scanning-audio");
+        app.scanningAudio.loop = true;
     },
 
     // Helper method: initialize NFC scanner
@@ -131,88 +135,75 @@ var app = {
         app.headerDiv.style.color = color;
     },
 
-    // Helper function: change visibility for enable scanning div
-    changeVisibility_EnableScanningDiv: function(isVisible) {
+    // Helper function: change content visibility
+    changeContentVisibility: function(contentElement, isVisible) {
         if (isVisible) {
-            app.enableScanningDiv.classList.remove("hidden");
+            contentElement.classList.remove("hidden");
         } else {
-            app.enableScanningDiv.classList.add("hidden")
+            contentElement.classList.add("hidden")
         }
     },
 
-    // Helper function: change visibility for awaiting scan div
-    changeVisibility_AwaitingScanDiv: function(isVisible) {
-        if (isVisible) {
-            app.awaitingScanDiv.classList.remove("hidden");
-        } else {
-            app.awaitingScanDiv.classList.add("hidden");
-        }
+    // Helper function: transition UI to awaiting scan
+    transitionTo_AwaitingScan: function(previousContentElement) {
+        app.addMessage("Transition to awaiting scan");
+        app.changeContentVisibility(previousContentElement, false);
+        app.changeContentVisibility(app.awaitingScanDiv, true);
+        app.updateHeader("INSERT ACCESS CARD", app.color_blue, true);
     },
 
-    // Helper function: change visibility for scanning active div
-    changeVisibility_ScanningActiveDiv: function(isVisible) {
-        if (isVisible) {
-            app.scanningActiveDiv.classList.remove("hidden");
-        } else {
-            app.scanningActiveDiv.classList.add("hidden");
-        }
+    // Helper function: transition UI to scanning active
+    transitionTo_ScanningActive: function() {
+        app.addMessage("Transition to scanning active");
+        app.changeContentVisibility(app.awaitingScanDiv, false);
+        app.changeContentVisibility(app.scanningActiveDiv, true);
+        app.updateHeader("ACCESS CARD INSERTED", app.color_blue, true);
+        app.scanningAudio.play();
+        setTimeout(function() {
+            app.scanningAudio.pause();
+            app.scanningAudio.currentTime = 0;
+        }, 3200)
     },
 
-    // Helper function: change visibility for access granted div
-    changeVisibility_AccessGrantedDiv: function(isVisible) {
-        if (isVisible) {
-            app.accessGrantedDiv.classList.remove("hidden");
-        } else {
-            app.accessGrantedDiv.classList.add("hidden");
-        }
+    // Helper function: transition UI to access granted
+    transitionTo_AccessGranted: function(cardData) {
+        app.addMessage("Transition to access granted");
+        app.changeContentVisibility(app.scanningActiveDiv, false);
+        app.accessGrantedDiv.innerHTML = `${cardData.name}<br>${cardData.title}<br>`
+        app.changeContentVisibility(app.accessGrantedDiv, true);
+        app.updateHeader("ACCESS GRANTED", app.color_green, true);
     },
 
-    // Helper function: change visibility for access denied div
-    changeVisibility_AccessDeniedDiv: function(isVisible) {
-        if (isVisible) {
-            app.accessDeniedDiv.classList.remove("hidden");
-        } else {
-            app.accessDeniedDiv.classList.add("hidden");
-        }
+    // Helper function: transition UI to access denied
+    transitionTo_AccessDenied: function() {
+        app.addMessage("Transition to access denied");
+        app.changeContentVisibility(app.scanningActiveDiv, false);
+        app.accessDeniedDivDiv.innerHTML = "Invalid card"
+        app.changeContentVisibility(app.accessGrantedDiv, true);
+        app.updateHeader("ACCESS DENIED", app.color_red, true);
     },
 
-    // Event: scanner reading
-    updateFromScan: function(scannedSerialNum) {
-        app.changeVisibility_AwaitingScanDiv(false);
-        app.changeVisibility_ScanningActiveDiv(true);
+    // Helper method: handle scanner response
+    handleScannerResponse: function(scannedSerialNum) {
+        app.transitionTo_ScanningActive();
 
-        const card = app.cardData.find(({ serialNumber }) => serialNumber == scannedSerialNum);
-        if (card) {
+        const cardData = app.nfcCardData.find(({ serialNumber }) => serialNumber == scannedSerialNum);
+        if (cardData) {
             setTimeout(function() {
-                app.changeVisibility_ScanningActiveDiv(false);
-                app.accessGrantedDiv.innerHTML = `${card.name}<br>${card.title}<br>`
-                app.changeVisibility_AccessGrantedDiv(true);
-                app.updateHeader("ACCESS GRANTED", "#0ab40a", true);
-            }, 3000)
+                app.transitionTo_AccessGranted(cardData);
+            }, 3200)
             setTimeout(function() {
-                app.changeVisibility_AccessGrantedDiv(false);
-                app.changeVisibility_AwaitingScanDiv(true)
-                app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
-            }, 7000)
+                app.transitionTo_AwaitingScan(app.accessGrantedDiv);
+            }, 6000)
         } else {
             setTimeout(function() {
-                app.changeVisibility_ScanningActiveDiv(false);
-                app.changeVisibility_AccessDeniedDiv(true);
-                app.updateHeader("ACCESS DENIED", "#aa0a00", true);
-            }, 3000)
+                app.transitionTo_AccessDenied();
+            }, 3200)
             setTimeout(function() {
-                app.changeVisibility_AccessGrantedDiv(false);
-                app.changeVisibility_AwaitingScanDiv(true)
-                app.updateHeader("SCAN TO ENTER", "#aa0a00", true);
-            }, 7000)
+                app.transitionTo_AwaitingScan(app.accessDeniedDiv);
+            }, 6000)
         }
     },
-
-    // Event: scanner read error
-    scannerReadError: function(e) {
-        app.addMessage("Cannot read data from NFC tag");
-    },
-
 
 
 
