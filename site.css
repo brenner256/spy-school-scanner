@@ -83,10 +83,6 @@ body {
     position: relative;
 }
 
-#enable-scanning-div {
-    /* border: solid 1px white */
-}
-
 #enable-scanning-button {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -121,8 +117,23 @@ body {
     padding-bottom: 60px;
     width: 30vh;
     border-radius: 8px;
-    border: solid 2px rgb(13, 110, 253);
+    border: solid 2px rgb(255, 150, 0);
     text-align: center;
+}
+
+#card-scan-anim-div  {
+    background-color: rgba(255, 150, 0, 0.7);
+    /* margin-top: -55px; */
+    height: 4px;
+    top: 100%;
+    box-shadow: 0 0 8px rgba(150, 50, 0, 0.5);
+    animation: cardscan 3s infinite;
+}
+
+@keyframes cardscan {
+    50% {
+        transform: translate(0, 52px);
+    }
 }
 
 #access-granted-div {
