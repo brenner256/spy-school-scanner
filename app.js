@@ -35,6 +35,8 @@ var app = {
     accessDeniedDiv: null,
     messageDiv: null,
     scanningAudio: null,
+    accessGrantedAudio: null,
+    accessDeniedAudio: null,
 
     color_red: "#ff0000",
     color_blue: "#005de9",
@@ -59,13 +61,13 @@ var app = {
         //         app.ncfReader.onreading = (event) => {
         //             console.log("Message read", event);
         //             app.addMessage("Message read: " + event.serialNumber);
-        //             app.handleScannerResponse(event.serialNumber);
+        //             app.transitionTo_ScanningActive(event.serialNumber);
         //         }
 
         //         app.ncfReader.onreadingerror  = (event) => {
         //             console.log("Message read error", event);
         //             app.addMessage("Message read error");
-        //             app.handleScannerResponse(null);
+        //             app.transitionTo_ScanningActive(null);
         //         }
 
         //     }).catch(function(error) {
@@ -81,7 +83,7 @@ var app = {
         // TODO: for testing
         app.transitionTo_AwaitingScan(app.enableScanningDiv);
         setTimeout(function() {
-            app.handleScannerResponse("04:9a:ad:99:78:00:00");
+            app.transitionTo_ScanningActive("04:9a:ad:99:78:00:00");
         }, 5000)
 
     },
@@ -97,7 +99,7 @@ var app = {
         
         app.enableScanningDiv = document.querySelector("#enable-scanning-div");
         app.enableScanningButton = document.querySelector("#enable-scanning-button");
-        app.enableScanningButton.addEventListener("click", this.enableScanningButtonClick);
+        app.enableScanningButton.addEventListener("click", app.enableScanningButtonClick);
 
         app.awaitingScanDiv = document.querySelector("#awaiting-scan-div");
 
@@ -110,7 +112,8 @@ var app = {
         app.messageDiv = document.querySelector("#message-div");
 
         app.scanningAudio = document.querySelector("#scanning-audio");
-        app.scanningAudio.loop = true;
+        app.accessGrantedAudio = document.querySelector("#access-granted-audio");
+        app.accessDeniedAudio = document.querySelector("#access-denied-audio");
     },
 
     // Helper method: initialize NFC scanner
@@ -153,16 +156,14 @@ var app = {
     },
 
     // Helper function: transition UI to scanning active
-    transitionTo_ScanningActive: function() {
+    transitionTo_ScanningActive: function(scannedSerialNum) {
         app.addMessage("Transition to scanning active");
         app.changeContentVisibility(app.awaitingScanDiv, false);
         app.changeContentVisibility(app.scanningActiveDiv, true);
         app.updateHeader("ACCESS CARD INSERTED", app.color_blue, true);
-        app.scanningAudio.play();
-        setTimeout(function() {
-            app.scanningAudio.pause();
-            app.scanningAudio.currentTime = 0;
-        }, 3200)
+        app.playAudio(app.scanningAudio, 3, () => {
+            app.handleScannerResponse(scannedSerialNum);
+        });
     },
 
     // Helper function: transition UI to access granted
@@ -172,6 +173,7 @@ var app = {
         app.accessGrantedDiv.innerHTML = `${cardData.name}<br>${cardData.title}<br>`
         app.changeContentVisibility(app.accessGrantedDiv, true);
         app.updateHeader("ACCESS GRANTED", app.color_green, true);
+        app.playAudio(app.accessGrantedAudio, 1, null);
     },
 
     // Helper function: transition UI to access denied
@@ -181,29 +183,42 @@ var app = {
         app.accessDeniedDivDiv.innerHTML = "Invalid card"
         app.changeContentVisibility(app.accessGrantedDiv, true);
         app.updateHeader("ACCESS DENIED", app.color_red, true);
+        app.playAudio(app.accessDeniedAudio, 1, null);
     },
 
     // Helper method: handle scanner response
     handleScannerResponse: function(scannedSerialNum) {
-        app.transitionTo_ScanningActive();
-
         const cardData = app.nfcCardData.find(({ serialNumber }) => serialNumber == scannedSerialNum);
         if (cardData) {
-            setTimeout(function() {
-                app.transitionTo_AccessGranted(cardData);
-            }, 3200)
+            app.transitionTo_AccessGranted(cardData);
             setTimeout(function() {
                 app.transitionTo_AwaitingScan(app.accessGrantedDiv);
-            }, 6000)
+            }, 3000)
         } else {
-            setTimeout(function() {
-                app.transitionTo_AccessDenied();
-            }, 3200)
+            app.transitionTo_AccessDenied();
             setTimeout(function() {
                 app.transitionTo_AwaitingScan(app.accessDeniedDiv);
-            }, 6000)
+            }, 3000)
         }
     },
+
+    // Helper function: play auto
+    playAudio: function(audioElement, playCount, endedCallback) {
+        let plays = 0;
+        audioElement.onended = function() {
+            plays++;
+            if (plays < playCount) {
+                audioElement.play();
+            } else {
+                if (endedCallback) {
+                    endedCallback();
+                }
+            }
+        }
+        audioElement.play();
+    },
+
+
 
 
 
