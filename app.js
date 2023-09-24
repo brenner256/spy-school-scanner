@@ -3,9 +3,9 @@ var app = {
     // TODO:
     // Add audio for access granted/denied
     // Add photos
-    // Animation for awaiting card scan
-    // Animation for scanning card
-
+    // Look into abort code for NFC reader to handle 
+    // mulpiple scan interrupt
+    // Look into caching on local device
 
 
 
@@ -15,12 +15,26 @@ var app = {
         {
             serialNumber: "04:9a:ad:99:78:00:00",
             name: "Jason Brenner",
-            title: "Tech Specialist"
+            status: "Active",
+            position: "Director, Technical Branch",
+            codeName: "Basil Pesto",
+            photo: "Jason.png"
         },
         {
             serialNumber: "test1",
             name: "Shannon Brenenr",
-            title: "Master Spy"
+            status: "Active",
+            position: "Spymaster",
+            codeName: "Tenacious Gnome",
+            photo: "Shan.png"
+        },
+        {
+            serialNumber: "test2",
+            name: "Becky McLaughlin",
+            status: "Active",
+            position: "Spymaster",
+            codeName: "Squawking Goat",
+            photo: "Becky.png"
         }
     ],
 
@@ -32,6 +46,11 @@ var app = {
     awaitingScanDiv: null,
     scanningActiveDiv: null,
     accessGrantedDiv: null,
+    spyPhotoImg: null,
+    nameCell: null,
+    statusCell: null,
+    positionCell: null,
+    codeNameCell: null,
     accessDeniedDiv: null,
     messageDiv: null,
     scanningAudio: null,
@@ -54,37 +73,37 @@ var app = {
         app.addMessage("Enable scanning button click");
         
         // TODO: commented out for testing
-        // if (app.ncfReader) {
-        //     app.ncfReader.scan().then(function() {
-        //         app.transitionTo_AwaitingScan(app.enableScanningDiv);
+        if (app.ncfReader) {
+            app.ncfReader.scan().then(function() {
+                app.transitionTo_AwaitingScan(app.enableScanningDiv);
 
-        //         app.ncfReader.onreading = (event) => {
-        //             console.log("Message read", event);
-        //             app.addMessage("Message read: " + event.serialNumber);
-        //             app.transitionTo_ScanningActive(event.serialNumber);
-        //         }
+                app.ncfReader.onreading = (event) => {
+                    console.log("Message read", event);
+                    app.addMessage("Message read: " + event.serialNumber);
+                    app.transitionTo_ScanningActive(event.serialNumber);
+                }
 
-        //         app.ncfReader.onreadingerror  = (event) => {
-        //             console.log("Message read error", event);
-        //             app.addMessage("Message read error");
-        //             app.transitionTo_ScanningActive(null);
-        //         }
+                app.ncfReader.onreadingerror  = (event) => {
+                    console.log("Message read error", event);
+                    app.addMessage("Message read error");
+                    app.transitionTo_ScanningActive(null);
+                }
 
-        //     }).catch(function(error) {
-        //         console.log("Scan promise error", error);
-        //         app.addMessage("Scan promise error");
-        //     });
-        // } else {
-        //     console.log("NFC reader is null");
-        //     app.addMessage("NFC reader is null");
-        // }
+            }).catch(function(error) {
+                console.log("Scan promise error", error);
+                app.addMessage("Scan promise error");
+            });
+        } else {
+            console.log("NFC reader is null");
+            app.addMessage("NFC reader is null");
+        }
 
 
         // TODO: for testing
-        app.transitionTo_AwaitingScan(app.enableScanningDiv);
-        setTimeout(function() {
-            app.transitionTo_ScanningActive("04:9a:ad:99:78:00:00");
-        }, 5000)
+        // app.transitionTo_AwaitingScan(app.enableScanningDiv);
+        // setTimeout(function() {
+        //     app.transitionTo_ScanningActive("04:9a:ad:99:78:00:00");
+        // }, 5000)
 
     },
 
@@ -106,6 +125,11 @@ var app = {
         app.scanningActiveDiv = document.querySelector("#scanning-active-div");
 
         app.accessGrantedDiv = document.querySelector("#access-granted-div");
+        app.spyPhotoImg = document.querySelector("#spy-photo-img");
+        app.nameCell = document.querySelector("#name-cell");
+        app.statusCell = document.querySelector("#status-cell");
+        app.positionCell = document.querySelector("#position-cell");
+        app.codeNameCell = document.querySelector("#codename-cell");
 
         app.accessDeniedDiv = document.querySelector("#access-denied-div");
 
@@ -170,7 +194,11 @@ var app = {
     transitionTo_AccessGranted: function(cardData) {
         app.addMessage("Transition to access granted");
         app.changeContentVisibility(app.scanningActiveDiv, false);
-        app.accessGrantedDiv.innerHTML = `${cardData.name}<br>${cardData.title}<br>`
+        app.nameCell.innerHTML = cardData.name;
+        app.statusCell.innerHTML = cardData.status;
+        app.positionCell.innerHTML = cardData.position;
+        app.codeNameCell.innerHTML = cardData.codeName;
+        app.spyPhotoImg.src = "images/spy-photos/" + cardData.photo;
         app.changeContentVisibility(app.accessGrantedDiv, true);
         app.updateHeader("ACCESS GRANTED", app.color_green, true);
         app.playAudio(app.accessGrantedAudio, 1, null);

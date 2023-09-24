@@ -138,12 +138,31 @@ body {
 
 #access-granted-div {
     margin-top: 20px;
-    padding-top: 55px;
-    padding-bottom: 60px;
-    width: 30vh;
+    padding-top: 20px;
+    width: 95%;
     border-radius: 8px;
-    border: solid 2px rgb(10, 180, 10);
+    border: solid 2px rgb(10, 130, 60);
     text-align: center;
+    font-size: 1.3rem;
+}
+
+#access-granted-div table {
+    width: 100%; 
+    border-collapse: collapse;
+    margin: 0px;
+}
+
+#access-granted-div td {
+    text-align: left;
+    padding: 5px 0px 5px 20px;
+    border-top: solid 2px rgb(10, 130, 60, .5);
+}
+
+#spy-photo-img {
+    height: 25vh;
+    width: 90%;
+    object-fit: contain;
+    margin-bottom: 20px;
 }
 
 #access-denied-div {
