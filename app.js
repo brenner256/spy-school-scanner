@@ -21,7 +21,7 @@ var app = {
             photo: "Jason.png"
         },
         {
-            serialNumber: "test1",
+            serialNumber: "04:a6:8e:98:78:00:00",
             name: "Shannon Brenenr",
             status: "Active",
             position: "Spymaster",
@@ -29,7 +29,7 @@ var app = {
             photo: "Shan.png"
         },
         {
-            serialNumber: "test2",
+            serialNumber: "04:1a:7f:98:78:00:00",
             name: "Becky McLaughlin",
             status: "Active",
             position: "Spymaster",
@@ -208,8 +208,8 @@ var app = {
     transitionTo_AccessDenied: function() {
         app.addMessage("Transition to access denied");
         app.changeContentVisibility(app.scanningActiveDiv, false);
-        app.accessDeniedDivDiv.innerHTML = "Invalid card"
-        app.changeContentVisibility(app.accessGrantedDiv, true);
+        app.accessDeniedDiv.innerHTML = "Invalid card"
+        app.changeContentVisibility(app.accessDeniedDiv, true);
         app.updateHeader("ACCESS DENIED", app.color_red, true);
         app.playAudio(app.accessDeniedAudio, 1, null);
     },
@@ -221,12 +221,12 @@ var app = {
             app.transitionTo_AccessGranted(cardData);
             setTimeout(function() {
                 app.transitionTo_AwaitingScan(app.accessGrantedDiv);
-            }, 3000)
+            }, 5000)
         } else {
             app.transitionTo_AccessDenied();
             setTimeout(function() {
                 app.transitionTo_AwaitingScan(app.accessDeniedDiv);
-            }, 3000)
+            }, 5000)
         }
     },
 
