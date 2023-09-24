@@ -23,7 +23,7 @@ var app = {
         {
             serialNumber: "04:a6:8e:98:78:00:00",
             name: "Shannon Brenenr",
-            status: "Active",
+            status: "Retired",
             position: "Spymaster",
             codeName: "Tenacious Gnome",
             photo: "Shan.png"
@@ -31,10 +31,18 @@ var app = {
         {
             serialNumber: "04:1a:7f:98:78:00:00",
             name: "Becky McLaughlin",
-            status: "Active",
+            status: "Retired",
             position: "Spymaster",
             codeName: "Squawking Goat",
             photo: "Becky.png"
+        },
+        {
+            serialNumber: "04:8f:ee:98:78:00:00",
+            name: "Amanda Baker",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Sugar Baby",
+            photo: "Amanda.png"
         }
     ],
 
