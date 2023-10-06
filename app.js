@@ -7,7 +7,7 @@ var app = {
 
 
     // App properties
-    appVersion: "1.2",
+    appVersion: "1.3",
     toggleDebugModeCount: 0,
     resetDebugModeCountTimeout: null,
     isDebugMode: false,
@@ -103,29 +103,28 @@ var app = {
     enableScanningButtonClick: function(e) {
         app.addMessage("Enable scanning button click");
         
-        // TODO: commented out for testing
         if (app.ncfReader) {
             app.ncfReader.scan().then(function() {
-                if (!app.isNfcReading) {
-                    app.isNfcReading = true;
-                    app.transitionTo_AwaitingScan(app.enableScanningDiv);
+                app.transitionTo_AwaitingScan(app.enableScanningDiv);
 
-                    app.ncfReader.onreading = (event) => {
-                        console.log("Message read", event);
-                        app.addMessage("Message read: " + event.serialNumber);
-                        if (!app.isNfcReading) {
-                            app.transitionTo_ScanningActive(event.serialNumber);
-                        }
-                    }
-
-                    app.ncfReader.onreadingerror  = (event) => {
-                        console.log("Message read error", event);
-                        app.addMessage("Message read error");
-                        if (!app.isNfcReading) {
-                            app.transitionTo_ScanningActive(null);
-                        }
+                app.ncfReader.onreading = (event) => {
+                    console.log("Message read", event);
+                    app.addMessage("Message read: " + event.serialNumber);
+                    if (!app.isNfcReading) {
+                        app.isNfcReading = true;
+                        app.transitionTo_ScanningActive(event.serialNumber);
                     }
                 }
+
+                app.ncfReader.onreadingerror  = (event) => {
+                    console.log("Message read error", event);
+                    app.addMessage("Message read error");
+                    if (!app.isNfcReading) {
+                        app.isNfcReading = true;
+                        app.transitionTo_ScanningActive(null);
+                    }
+                }
+                
             }).catch(function(error) {
                 console.log("Scan promise error", error);
                 app.addMessage("Scan promise error");
