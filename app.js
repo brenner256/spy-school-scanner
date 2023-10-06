@@ -1,16 +1,14 @@
 var app = {
 
     // TODO:
-    // Add audio for access granted/denied
-    // Add photos
-    // Look into abort code for NFC reader to handle 
-    // mulpiple scan interrupt
+    // Handle multiple scan interrupt 
     // Look into caching on local device
 
 
 
     // App properties
     ncfReader: null,
+    isNfcReading: false,
     nfcCardData: [
         {
             serialNumber: "04:9a:ad:99:78:00:00",
@@ -83,20 +81,22 @@ var app = {
         // TODO: commented out for testing
         if (app.ncfReader) {
             app.ncfReader.scan().then(function() {
-                app.transitionTo_AwaitingScan(app.enableScanningDiv);
+                if (!app.isNfcReading) {
+                    app.isNfcReading = true;
+                    app.transitionTo_AwaitingScan(app.enableScanningDiv);
 
-                app.ncfReader.onreading = (event) => {
-                    console.log("Message read", event);
-                    app.addMessage("Message read: " + event.serialNumber);
-                    app.transitionTo_ScanningActive(event.serialNumber);
+                    app.ncfReader.onreading = (event) => {
+                        console.log("Message read", event);
+                        app.addMessage("Message read: " + event.serialNumber);
+                        app.transitionTo_ScanningActive(event.serialNumber);
+                    }
+
+                    app.ncfReader.onreadingerror  = (event) => {
+                        console.log("Message read error", event);
+                        app.addMessage("Message read error");
+                        app.transitionTo_ScanningActive(null);
+                    }
                 }
-
-                app.ncfReader.onreadingerror  = (event) => {
-                    console.log("Message read error", event);
-                    app.addMessage("Message read error");
-                    app.transitionTo_ScanningActive(null);
-                }
-
             }).catch(function(error) {
                 console.log("Scan promise error", error);
                 app.addMessage("Scan promise error");
@@ -209,7 +209,9 @@ var app = {
         app.spyPhotoImg.src = "images/spy-photos/" + cardData.photo;
         app.changeContentVisibility(app.accessGrantedDiv, true);
         app.updateHeader("ACCESS GRANTED", app.color_green, true);
-        app.playAudio(app.accessGrantedAudio, 1, null);
+        app.playAudio(app.accessGrantedAudio, 1, () => {
+            app.isNfcReading = false;
+        });
     },
 
     // Helper function: transition UI to access denied
@@ -219,7 +221,9 @@ var app = {
         app.accessDeniedDiv.innerHTML = "Invalid card"
         app.changeContentVisibility(app.accessDeniedDiv, true);
         app.updateHeader("ACCESS DENIED", app.color_red, true);
-        app.playAudio(app.accessDeniedAudio, 1, null);
+        app.playAudio(app.accessDeniedAudio, 1, () => {
+            app.isNfcReading = false;
+        });
     },
 
     // Helper method: handle scanner response
