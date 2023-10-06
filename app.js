@@ -7,7 +7,7 @@ var app = {
 
 
     // App properties
-    appVersion: "1.1",
+    appVersion: "1.2",
     toggleDebugModeCount: 0,
     resetDebugModeCountTimeout: null,
     isDebugMode: false,
@@ -113,13 +113,17 @@ var app = {
                     app.ncfReader.onreading = (event) => {
                         console.log("Message read", event);
                         app.addMessage("Message read: " + event.serialNumber);
-                        app.transitionTo_ScanningActive(event.serialNumber);
+                        if (!app.isNfcReading) {
+                            app.transitionTo_ScanningActive(event.serialNumber);
+                        }
                     }
 
                     app.ncfReader.onreadingerror  = (event) => {
                         console.log("Message read error", event);
                         app.addMessage("Message read error");
-                        app.transitionTo_ScanningActive(null);
+                        if (!app.isNfcReading) {
+                            app.transitionTo_ScanningActive(null);
+                        }
                     }
                 }
             }).catch(function(error) {
@@ -179,12 +183,7 @@ var app = {
     // Helper method: initialize NFC scanner
     initializeScanner: function() {
         if ('NDEFReader' in window) { 
-            app.ncfReader = new NDEFReader();
-            app.ncfReader.addEventListener("reading", () => {
-                if (app.isNfcReading) {
-                    return;
-                }
-            });
+            app.ncfReader = new NDEFReader();            
         } else {
             app.addMessage("NFC reader NOT supported");
         }
