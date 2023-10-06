@@ -9,6 +9,7 @@ var app = {
     // App properties
     appVersion: "1.0",
     toggleDebugModeCount: 0,
+    resetDebugModeCountTimeout: null,
     isDebugMode: false,
     ncfReader: null,
     isNfcReading: false,
@@ -80,7 +81,9 @@ var app = {
 
     // Event: title div click
     titleDivClick: function(e) {
+        clearTimeout(app.resetDebugModeCountTimeout)
         app.toggleDebugModeCount++;
+
         if (app.toggleDebugModeCount >= 7) {
             app.isDebugMode = !app.isDebugMode;
             app.toggleDebugModeCount = 0;
@@ -89,6 +92,10 @@ var app = {
             if (app.isDebugMode) {
                 app.addMessage("Debug mode enabled, app ver " + app.appVersion);
             }
+        } else {
+            app.resetDebugModeCountTimeout = setTimeout(() => {
+                app.toggleDebugModeCount = 0;
+            }, 5000);
         }
     },
 
