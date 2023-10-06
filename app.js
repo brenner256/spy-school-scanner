@@ -7,6 +7,9 @@ var app = {
 
 
     // App properties
+    appVersion: "1.0",
+    toggleDebugModeCount: 0,
+    isDebugMode: false,
     ncfReader: null,
     isNfcReading: false,
     nfcCardData: [
@@ -46,6 +49,7 @@ var app = {
 
     
     // UI elements
+    titleDiv: null,
     headerDiv: null,
     enableScanningDiv: null,
     enableScanningButton: null,
@@ -72,6 +76,20 @@ var app = {
     load: function() {
         app.getUIElementReferences();
         app.initializeScanner();
+    },
+
+    // Event: title div click
+    titleDivClick: function(e) {
+        app.toggleDebugModeCount++;
+        if (app.toggleDebugModeCount >= 7) {
+            app.isDebugMode = !app.isDebugMode;
+            app.toggleDebugModeCount = 0;
+            app.messageDiv.innerHTML = "";
+            
+            if (app.isDebugMode) {
+                app.addMessage("Debug mode enabled, app ver " + app.appVersion);
+            }
+        }
     },
 
     // Event: enable scanning button click
@@ -122,6 +140,9 @@ var app = {
 
     // Helper method: get UI element references
     getUIElementReferences: function() {
+        app.titleDiv = document.querySelector("#title-div");
+        app.titleDiv.addEventListener("click", app.titleDivClick)
+
         app.headerDiv = document.querySelector("#header-div");
         
         app.enableScanningDiv = document.querySelector("#enable-scanning-div");
@@ -258,13 +279,11 @@ var app = {
         audioElement.play();
     },
 
-
-
-
-
     // Helper method: add message
     addMessage: function(messageText) {
-        app.messageDiv.innerHTML += `${messageText}<br>`;
+        if (app.isDebugMode) {
+            app.messageDiv.innerHTML += `${messageText}<br>`;
+        }
     }
 
 }
