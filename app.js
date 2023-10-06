@@ -215,6 +215,7 @@ var app = {
         app.changeContentVisibility(previousContentElement, false);
         app.changeContentVisibility(app.awaitingScanDiv, true);
         app.updateHeader("INSERT ACCESS CARD", app.color_blue, true);
+        app.isNfcReading = false;
     },
 
     // Helper function: transition UI to scanning active
@@ -239,9 +240,7 @@ var app = {
         app.spyPhotoImg.src = "images/spy-photos/" + cardData.photo;
         app.changeContentVisibility(app.accessGrantedDiv, true);
         app.updateHeader("ACCESS GRANTED", app.color_green, true);
-        app.playAudio(app.accessGrantedAudio, 1, () => {
-            app.isNfcReading = false;
-        });
+        app.playAudio(app.accessGrantedAudio, 1, null);
     },
 
     // Helper function: transition UI to access denied
@@ -251,9 +250,7 @@ var app = {
         app.accessDeniedDiv.innerHTML = "Invalid card"
         app.changeContentVisibility(app.accessDeniedDiv, true);
         app.updateHeader("ACCESS DENIED", app.color_red, true);
-        app.playAudio(app.accessDeniedAudio, 1, () => {
-            app.isNfcReading = false;
-        });
+        app.playAudio(app.accessDeniedAudio, 1, null);
     },
 
     // Helper method: handle scanner response
