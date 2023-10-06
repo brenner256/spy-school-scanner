@@ -180,9 +180,13 @@ var app = {
     initializeScanner: function() {
         if ('NDEFReader' in window) { 
             app.ncfReader = new NDEFReader();
+            app.ncfReader.addEventListener("reading", () => {
+                if (app.isNfcReading) {
+                    return;
+                }
+            });
         } else {
             app.addMessage("NFC reader NOT supported");
-            // TODO: error message
         }
     },
 
