@@ -1,13 +1,12 @@
 var app = {
 
     // TODO:
-    // Handle multiple scan interrupt 
     // Look into caching on local device
 
 
 
     // App properties
-    appVersion: "1.4",
+    appVersion: "1.5",
     toggleDebugModeCount: 0,
     resetDebugModeCountTimeout: null,
     isDebugMode: false,
@@ -75,6 +74,10 @@ var app = {
 
     // Event: page load
     load: function() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("worker.js");
+        }
+        
         app.getUIElementReferences();
         app.initializeScanner();
     },
@@ -142,10 +145,6 @@ var app = {
         // }, 5000)
 
     },
-
-    
-
-
 
 
     // Helper method: get UI element references
