@@ -27,7 +27,7 @@ var app = {
             status: "Retired",
             position: "Spymaster",
             codeName: "Tenacious Gnome",
-            photo: "Shan.png"
+            photo: "Shan.jpg"
         },
         {
             serialNumber: "04:1a:7f:98:78:00:00",
@@ -35,7 +35,7 @@ var app = {
             status: "Retired",
             position: "Spymaster",
             codeName: "Squawking Goat",
-            photo: "Becky.png"
+            photo: "Becky.jpg"
         },
         {
             serialNumber: "04:8f:ee:98:78:00:00",
@@ -43,7 +43,7 @@ var app = {
             status: "Active",
             position: "Agent in Training",
             codeName: "Sugar Baby",
-            photo: "Amanda.png"
+            photo: "Amanda.jpg"
         }
     ],
 
