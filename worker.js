@@ -5,7 +5,7 @@
 
 // Set up local file cache for offline use
 // Increment version num when app files changes
-const cacheName = "SpySchool-v2";
+const cacheName = "SpySchool-v3";
 const appFiles = [
     "index.html",
     "app.js",
