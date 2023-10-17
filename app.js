@@ -6,7 +6,7 @@ var app = {
 
 
     // App properties
-    appVersion: "1.7",
+    appVersion: "1.8",
     toggleDebugModeCount: 0,
     resetDebugModeCountTimeout: null,
     isDebugMode: false,
@@ -19,7 +19,7 @@ var app = {
             status: "Active",
             position: "Director, Technical Branch",
             codeName: "Basil Pesto",
-            photo: "Jason.png"
+            photo: "FloBaker.png"
         },
         {
             serialNumber: "04:a6:8e:98:78:00:00",
@@ -44,6 +44,14 @@ var app = {
             position: "Agent in Training",
             codeName: "Sugar Baby",
             photo: "Amanda.jpg"
+        },
+        {
+            serialNumber: "",
+            name: "Flo Baker",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Fire Beads",
+            photo: ""
         }
     ],
 
