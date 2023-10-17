@@ -6,7 +6,7 @@ var app = {
 
 
     // App properties
-    appVersion: "1.8",
+    appVersion: "1.9",
     toggleDebugModeCount: 0,
     resetDebugModeCountTimeout: null,
     isDebugMode: false,
