@@ -1,12 +1,7 @@
 var app = {
 
-    // TODO:
-    // Look into caching on local device
-
-
-
     // App properties
-    appVersion: "1.9",
+    appVersion: "1.10",
     toggleDebugModeCount: 0,
     resetDebugModeCountTimeout: null,
     isDebugMode: false,
@@ -19,7 +14,7 @@ var app = {
             status: "Active",
             position: "Director, Technical Branch",
             codeName: "Basil Pesto",
-            photo: "FloBaker.png"
+            photo: "Jason.png"
         },
         {
             serialNumber: "04:a6:8e:98:78:00:00",
@@ -46,12 +41,148 @@ var app = {
             photo: "Amanda.jpg"
         },
         {
-            serialNumber: "",
+            serialNumber: "04:43:a9:76:8f:61:80",
+            name: "Adelyn Reich",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Glitter Chicken",
+            photo: "AdelynReich.png"
+        },
+        {
+            serialNumber: "04:f1:2f:77:8f:61:80",
+            name: "Ainsley Young",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Pomegranate Owl",
+            photo: "AinsleyYoung.png"
+        },
+        {
+            serialNumber: "04:68:b7:99:78:00:00",
+            name: "Betty Martin",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Screeching Grapes",
+            photo: "BettyMartin.png"
+        },
+        {
+            serialNumber: "04:c7:75:99:78:00:00",
+            name: "Brighton Sheridan",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Sparkle Toaster",
+            photo: "BrightonSheridan.png"
+        },
+        {
+            serialNumber: "04:7f:93:98:78:00:00",
+            name: "Calista Arnold",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Epic Persimmon",
+            photo: "CalistaArnold.png"
+        },
+        {
+            serialNumber: "04:71:1f:99:78:00:00",
+            name: "Caroline Martin",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Jumping Turtle",
+            photo: "CarolineMartin.png"
+        },
+        {
+            serialNumber: "04:86:fa:98:78:00:00",
+            name: "Chloe Lombardo",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Glimmer Gecko",
+            photo: "ChloeLombardo.png"
+        },
+        {
+            serialNumber: "04:69:e8:98:78:00:00",
+            name: "Cora Young",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Mountain Caterpillar",
+            photo: "CoraYoung.png"
+        },
+        {
+            serialNumber: "04:b2:47:99:78:00:00",
+            name: "Edison Baker",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Sailing Bear",
+            photo: "EdisonBaker.png"
+        },
+        {
+            serialNumber: "04:ca:ef:98:78:00:00",
+            name: "Elias Snyder",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Rainbow Lion",
+            photo: "EliasSnyder.png"
+        },
+        {
+            serialNumber: "04:2a:45:99:78:00:00",
+            name: "Elijah Edwin",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Sneezing Zebra",
+            photo: "ElijahEdwin.png"
+        },
+        {
+            serialNumber: "04:3d:00:99:78:00:00",
             name: "Flo Baker",
             status: "Active",
             position: "Agent in Training",
             codeName: "Fire Beads",
-            photo: ""
+            photo: "FloBaker.png"
+        },
+        {
+            serialNumber: "04:e0:be:98:78:00:00",
+            name: "Gavi McLaughlin",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Pickle Flames",
+            photo: "GaviMcLaughlin.png"
+        },
+        {
+            serialNumber: "04:67:b7:98:78:00:00",
+            name: "Isla Young",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Stellar Avalanche",
+            photo: "IslaYoung.png"
+        },
+        {
+            serialNumber: "04:9e:ba:99:78:00:00",
+            name: "Jack Redden",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Beach Turkey",
+            photo: "JackRedden.png"
+        },
+        {
+            serialNumber: "04:89:f5:98:78:00:00",
+            name: "Jake Landini",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Indiana Hedgehog",
+            photo: "JakeLandini.png"
+        },
+        {
+            serialNumber: "04:9d:ab:98:78:00:00",
+            name: "Macklin Morgan",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Happy Snowball",
+            photo: "MacklinMorgan.png"
+        },
+        {
+            serialNumber: "04:a0:b5:98:78:00:00",
+            name: "Zephyra Hafner",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Pigeon Flower",
+            photo: "ZephyraHafner.png"
         }
     ],
 
