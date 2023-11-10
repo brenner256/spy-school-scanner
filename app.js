@@ -1,7 +1,7 @@
 var app = {
 
     // App properties
-    appVersion: "1.10",
+    appVersion: "1.11",
     toggleDebugModeCount: 0,
     resetDebugModeCountTimeout: null,
     isDebugMode: false,
@@ -36,7 +36,7 @@ var app = {
             serialNumber: "04:8f:ee:98:78:00:00",
             name: "Amanda Baker",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Sugar Baby",
             photo: "Amanda.jpg"
         },
@@ -44,7 +44,7 @@ var app = {
             serialNumber: "04:43:a9:76:8f:61:80",
             name: "Adelyn Reich",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Glitter Chicken",
             photo: "AdelynReich.png"
         },
@@ -52,7 +52,7 @@ var app = {
             serialNumber: "04:f1:2f:77:8f:61:80",
             name: "Ainsley Young",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Pomegranate Owl",
             photo: "AinsleyYoung.png"
         },
@@ -60,7 +60,7 @@ var app = {
             serialNumber: "04:68:b7:99:78:00:00",
             name: "Betty Martin",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Screeching Grapes",
             photo: "BettyMartin.png"
         },
@@ -68,7 +68,7 @@ var app = {
             serialNumber: "04:c7:75:99:78:00:00",
             name: "Brighton Sheridan",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Sparkle Toaster",
             photo: "BrightonSheridan.png"
         },
@@ -76,7 +76,7 @@ var app = {
             serialNumber: "04:7f:93:98:78:00:00",
             name: "Calista Arnold",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Epic Persimmon",
             photo: "CalistaArnold.png"
         },
@@ -84,7 +84,7 @@ var app = {
             serialNumber: "04:71:1f:99:78:00:00",
             name: "Caroline Martin",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Jumping Turtle",
             photo: "CarolineMartin.png"
         },
@@ -92,7 +92,7 @@ var app = {
             serialNumber: "04:86:fa:98:78:00:00",
             name: "Chloe Lombardo",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Glimmer Gecko",
             photo: "ChloeLombardo.png"
         },
@@ -100,7 +100,7 @@ var app = {
             serialNumber: "04:69:e8:98:78:00:00",
             name: "Cora Young",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Mountain Caterpillar",
             photo: "CoraYoung.png"
         },
@@ -108,7 +108,7 @@ var app = {
             serialNumber: "04:b2:47:99:78:00:00",
             name: "Edison Baker",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Sailing Bear",
             photo: "EdisonBaker.png"
         },
@@ -116,7 +116,7 @@ var app = {
             serialNumber: "04:ca:ef:98:78:00:00",
             name: "Elias Snyder",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Rainbow Lion",
             photo: "EliasSnyder.png"
         },
@@ -124,7 +124,7 @@ var app = {
             serialNumber: "04:2a:45:99:78:00:00",
             name: "Elijah Edwin",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Sneezing Zebra",
             photo: "ElijahEdwin.png"
         },
@@ -132,7 +132,7 @@ var app = {
             serialNumber: "04:3d:00:99:78:00:00",
             name: "Flo Baker",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Fire Beads",
             photo: "FloBaker.png"
         },
@@ -140,7 +140,7 @@ var app = {
             serialNumber: "04:e0:be:98:78:00:00",
             name: "Gavi McLaughlin",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Pickle Flames",
             photo: "GaviMcLaughlin.png"
         },
@@ -148,7 +148,7 @@ var app = {
             serialNumber: "04:67:b7:98:78:00:00",
             name: "Isla Young",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Stellar Avalanche",
             photo: "IslaYoung.png"
         },
@@ -156,7 +156,7 @@ var app = {
             serialNumber: "04:9e:ba:99:78:00:00",
             name: "Jack Redden",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Beach Turkey",
             photo: "JackRedden.png"
         },
@@ -164,7 +164,7 @@ var app = {
             serialNumber: "04:89:f5:98:78:00:00",
             name: "Jake Landini",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Indiana Hedgehog",
             photo: "JakeLandini.png"
         },
@@ -172,7 +172,7 @@ var app = {
             serialNumber: "04:9d:ab:98:78:00:00",
             name: "Macklin Morgan",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Happy Snowball",
             photo: "MacklinMorgan.png"
         },
@@ -180,7 +180,7 @@ var app = {
             serialNumber: "04:a0:b5:98:78:00:00",
             name: "Zephyra Hafner",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Pigeon Flower",
             photo: "ZephyraHafner.png"
         }
