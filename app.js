@@ -1,7 +1,7 @@
 var app = {
 
     // App properties
-    appVersion: "1.12",
+    appVersion: "1.13",
     toggleDebugModeCount: 0,
     resetDebugModeCountTimeout: null,
     isDebugMode: false,
