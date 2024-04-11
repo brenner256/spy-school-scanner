@@ -49,6 +49,14 @@ var app = {
             photo: "AriaRudisill.png"
         },
         {
+            serialNumber: "04:f9:48:36:5f:61:80",
+            name: "Ava Redden",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Red Knight",
+            photo: "AvaRedden.png"
+        },
+        {
             serialNumber: "04:bb:ae:f5:9f:61:80",
             name: "Cain Penny",
             status: "Active",
@@ -103,6 +111,14 @@ var app = {
             position: "Agent in Training",
             codeName: "Neon Wolf",
             photo: "JaysonBabcock.png"
+        },
+        {
+            serialNumber: "04:a6:dc:24:6f:61:80",
+            name: "Justin McCollum",
+            status: "Active",
+            position: "Agent in Training",
+            codeName: "Captain Crunch",
+            photo: "JustinMcCollum.png"
         },
         {
             serialNumber: "04:a7:26:73:8f:61:80",
