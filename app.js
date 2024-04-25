@@ -1,7 +1,7 @@
 var app = {
 
     // App properties
-    appVersion: "1.14",
+    appVersion: "1.15",
     toggleDebugModeCount: 0,
     resetDebugModeCountTimeout: null,
     isDebugMode: false,
@@ -44,7 +44,7 @@ var app = {
             serialNumber: "04:ab:98:17:6f:61:80",
             name: "Aria Rudisill",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Red Lightning",
             photo: "AriaRudisill.png"
         },
@@ -52,7 +52,7 @@ var app = {
             serialNumber: "04:f9:48:36:5f:61:80",
             name: "Ava Redden",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Red Knight",
             photo: "AvaRedden.png"
         },
@@ -60,7 +60,7 @@ var app = {
             serialNumber: "04:bb:ae:f5:9f:61:80",
             name: "Cain Penny",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Copper Flame",
             photo: "CainPenny.png"
         },
@@ -68,7 +68,7 @@ var app = {
             serialNumber: "04:e9:6c:1e:6f:61:80",
             name: "Campbell Morgan",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Spotty Eagle",
             photo: "CampbellMorgan.png"
         },
@@ -76,7 +76,7 @@ var app = {
             serialNumber: "04:c6:2a:77:8f:61:80",
             name: "Christopher Craven",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Royal Dragon",
             photo: "ChristopherCraven.png"
         },
@@ -84,7 +84,7 @@ var app = {
             serialNumber: "04:31:17:1e:6f:61:80",
             name: "Colette Smith",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Cosmic Wind",
             photo: "ColetteSmith.png"
         },
@@ -92,7 +92,7 @@ var app = {
             serialNumber: "04:8a:97:16:6f:61:81",
             name: "Eddie Lewter",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Fearless Star",
             photo: "EddieLewter.png"
         },
@@ -100,7 +100,7 @@ var app = {
             serialNumber: "04:2d:5b:19:6f:61:80",
             name: "Hendrix Haithcock",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Dark Cobra",
             photo: "HendrixHaithcock.png"
         },
@@ -108,7 +108,7 @@ var app = {
             serialNumber: "04:4e:4b:17:6f:61:80",
             name: "Jayson Babcock",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Neon Wolf",
             photo: "JaysonBabcock.png"
         },
@@ -116,7 +116,7 @@ var app = {
             serialNumber: "04:a6:dc:24:6f:61:80",
             name: "Justin McCollum",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Captain Crunch",
             photo: "JustinMcCollum.png"
         },
@@ -124,7 +124,7 @@ var app = {
             serialNumber: "04:a7:26:73:8f:61:80",
             name: "Leven Guerrant",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Sleeping Jaguar",
             photo: "LevenGuerrant.png"
         },
@@ -132,7 +132,7 @@ var app = {
             serialNumber: "04:f3:ce:f6:9f:61:80",
             name: "Levi McCollum",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Wise Cloud",
             photo: "LeviMcCollum.png"
         },
@@ -140,7 +140,7 @@ var app = {
             serialNumber: "04:b6:59:f7:9f:61:80",
             name: "Liam Guthrie",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Glowing Fox",
             photo: "LiamGuthrie.png"
         },
@@ -148,7 +148,7 @@ var app = {
             serialNumber: "04:84:c2:73:8f:61:80",
             name: "Liam Padgett",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Silver Archer",
             photo: "LiamPadgett.png"
         },
@@ -156,7 +156,7 @@ var app = {
             serialNumber: "04:a3:65:16:6f:61:80",
             name: "Oliver Cox",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Silent Puma",
             photo: "OliverCox.png"
         },
@@ -164,7 +164,7 @@ var app = {
             serialNumber: "04:3c:2c:1b:6f:61:80",
             name: "Ollie Penny",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Angry Lizard",
             photo: "OlliePenny.png"
         },
@@ -172,7 +172,7 @@ var app = {
             serialNumber: "04:83:fe:1d:6f:61:80",
             name: "Orion Smith",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Strong Jackalope",
             photo: "OrionSmith.png"
         },
@@ -180,7 +180,7 @@ var app = {
             serialNumber: "04:92:ae:77:8f:61:80",
             name: "Peyton Coble",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Green Spider",
             photo: "PeytonCoble.png"
         },
@@ -188,7 +188,7 @@ var app = {
             serialNumber: "04:60:32:19:6f:61:80",
             name: "River Jones",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Cheerful Manatee",
             photo: "RiverJones.png"
         },
@@ -196,7 +196,7 @@ var app = {
             serialNumber: "04:b3:8f:17:6f:61:80",
             name: "Sawyer Denton",
             status: "Active",
-            position: "Agent in Training",
+            position: "Spy",
             codeName: "Hungry Tiger",
             photo: "SawyerDenton.png"
         }
